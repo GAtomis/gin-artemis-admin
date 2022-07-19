@@ -2,13 +2,14 @@
  * @Description: api层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 17:56:36
- * @LastEditTime: 2022-07-19 21:37:34
+ * @LastEditTime: 2022-07-19 23:32:26
  * @LastEditors: Gavin
  */
 package RBAC
 
 import (
 	"Artemis-admin-web/model/RBAC/request"
+	"Artemis-admin-web/service/rbac_core"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
@@ -25,6 +26,10 @@ func CreateRole(ctx *gin.Context) {
 
 	var r request.SysRole
 	err := ctx.ShouldBindJSON(&r)
+
+	//载入api
+	r2 := new(rbac_core.RBACApi)
+	r2.CreateItem()
 
 	if err != nil {
 		ctx.JSON(200, gin.H{
