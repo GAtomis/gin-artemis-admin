@@ -2,7 +2,7 @@
  * @Description: api层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 17:56:36
- * @LastEditTime: 2022-07-19 23:32:26
+ * @LastEditTime: 2022-07-20 16:07:35
  * @LastEditors: Gavin
  */
 package RBAC
@@ -10,7 +10,7 @@ package RBAC
 import (
 	"Artemis-admin-web/model/RBAC/request"
 	"Artemis-admin-web/service/rbac_core"
-	"fmt"
+	"Artemis-admin-web/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,24 +23,20 @@ import (
 // @Success 200 {object} response.Response{data=systemRes.SysMenusResponse,msg=string} "获取用户动态路由,返回包括系统菜单详情列表"
 // @Router /menu/getMenu [post]
 func CreateRole(ctx *gin.Context) {
-
-	var r request.SysRole
-	err := ctx.ShouldBindJSON(&r)
+	//声明一个SysRole
+	var newSysRole request.SysRole
+	//成功JSON化
+	err := ctx.ShouldBindJSON(&newSysRole)
+	if err == nil {
+		utils.Fail(ctx)
+		return
+	}
 
 	//载入api
 	r2 := new(rbac_core.RBACApi)
-	r2.CreateItem()
-
-	if err != nil {
-		ctx.JSON(200, gin.H{
-			"msg":  "报错了",
-			"data": []any{},
-		})
-	} else {
-		fmt.Printf("r: %v\n", r)
-		ctx.JSON(200, gin.H{
-			"msg": "success",
-		})
+	res, err2 := r2.CreateItem(newSysRole)
+	if err2 != nil {
+		utils.OkDM(res.ID, "操作成功", ctx)
 	}
 
 	// if menus, err := menuService.GetMenuTree(utils.GetUserAuthorityId(c)); err != nil {

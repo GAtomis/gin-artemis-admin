@@ -2,12 +2,12 @@
  * @Description: 初始化
  * @Author: Gavin
  * @Date: 2022-07-18 15:11:28
- * @LastEditTime: 2022-07-18 17:28:25
+ * @LastEditTime: 2022-07-20 16:25:04
  * @LastEditors: Gavin
  */
 package main
 
-import rbac "Artemis-admin-web/model/RBAC"
+import "Artemis-admin-web/router"
 
 /**
  * @description: 入口函数....
@@ -15,5 +15,5 @@ import rbac "Artemis-admin-web/model/RBAC"
  * @Date: 2022-07-18 15:12:06
  */
 func main() {
-	rbac.OnServer()
+	router.Start()
 }
