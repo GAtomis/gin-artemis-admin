@@ -2,7 +2,7 @@
  * @Description: api层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 17:56:36
- * @LastEditTime: 2022-07-20 16:07:35
+ * @LastEditTime: 2022-07-20 17:23:02
  * @LastEditors: Gavin
  */
 package RBAC
@@ -27,7 +27,7 @@ func CreateRole(ctx *gin.Context) {
 	var newSysRole request.SysRole
 	//成功JSON化
 	err := ctx.ShouldBindJSON(&newSysRole)
-	if err == nil {
+	if err != nil {
 		utils.Fail(ctx)
 		return
 	}
@@ -36,8 +36,10 @@ func CreateRole(ctx *gin.Context) {
 	r2 := new(rbac_core.RBACApi)
 	res, err2 := r2.CreateItem(newSysRole)
 	if err2 != nil {
-		utils.OkDM(res.ID, "操作成功", ctx)
+		utils.Fail(ctx)
+		return
 	}
+	utils.OkDM(res.ID, "操作成功", ctx)
 
 	// if menus, err := menuService.GetMenuTree(utils.GetUserAuthorityId(c)); err != nil {
 	// 	global.GVA_LOG.Error("获取失败!", zap.Error(err))
