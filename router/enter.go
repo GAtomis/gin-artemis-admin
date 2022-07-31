@@ -2,7 +2,7 @@
  * @Description: gin启动服务
  * @Author: Gavin
  * @Date: 2022-07-20 16:10:20
- * @LastEditTime: 2022-07-20 16:47:44
+ * @LastEditTime: 2022-07-22 17:22:53
  * @LastEditors: Gavin
  */
 package router
@@ -16,7 +16,10 @@ import (
 func Start() {
 	r := gin.Default()
 	rg := r.Group("api")
-	new(gateway.RoleRouter).InitRoleRouter(rg)
+	r2 := new(gateway.Router)
+	r2.InitCaptcha(rg)
+	r2.InitRoleRouter(rg)
+	r2.InitUserRouter(rg)
 
-	r.Run(":9527")
+	r.Run(":8888")
 }

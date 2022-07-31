@@ -2,7 +2,7 @@
  * @Description: 工具
  * @Author: Gavin
  * @Date: 2022-07-20 11:14:40
- * @LastEditTime: 2022-07-20 14:26:37
+ * @LastEditTime: 2022-07-21 17:43:49
  * @LastEditors: Gavin
  */
 package utils
@@ -14,9 +14,9 @@ import (
 )
 
 type Response struct {
-	Code int         `json:"code"`
-	Data interface{} `json:"data"`
-	Msg  string      `json:"msg"`
+	Code   int    `json:"code"`
+	Result any    `json:"result"`
+	Msg    string `json:"msg"`
 }
 
 const (
@@ -33,11 +33,11 @@ const (
  * @return {*}
  * @Date: 2022-07-20 11:26:25
  */
-func Result(code int, data interface{}, msg string, c *gin.Context) {
+func Result(code int, result any, msg string, c *gin.Context) {
 	// 开始时间
 	c.JSON(http.StatusOK, Response{
 		code,
-		data,
+		result,
 		msg,
 	})
 }
@@ -86,4 +86,16 @@ func Fail(ctx *gin.Context) {
  */
 func FailDM(data interface{}, message string, c *gin.Context) {
 	Result(ERROR, data, message, c)
+}
+
+/**
+ * @description: 失败状态 参数为data和msg
+ * @param {interface{}} data 返回数据
+ * @param {string} message 消息提醒
+ * @param {*gin.Context} c gin上下文
+ * @return {*}
+ * @Date: 2022-07-20 11:37:41
+ */
+func FailM(message string, c *gin.Context) {
+	Result(ERROR, map[string]interface{}{}, message, c)
 }

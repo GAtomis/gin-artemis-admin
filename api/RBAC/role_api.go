@@ -2,13 +2,14 @@
  * @Description: api层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 17:56:36
- * @LastEditTime: 2022-07-20 17:23:02
+ * @LastEditTime: 2022-07-31 09:55:10
  * @LastEditors: Gavin
  */
 package RBAC
 
 import (
 	"Artemis-admin-web/model/RBAC/request"
+	"Artemis-admin-web/model/global"
 	"Artemis-admin-web/service/rbac_core"
 	"Artemis-admin-web/utils"
 
@@ -31,23 +32,26 @@ func CreateRole(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-
 	//载入api
-	r2 := new(rbac_core.RBACApi)
+	r2 := new(rbac_core.Role)
 	res, err2 := r2.CreateItem(newSysRole)
 	if err2 != nil {
 		utils.Fail(ctx)
 		return
 	}
 	utils.OkDM(res.ID, "操作成功", ctx)
+}
+func GetRoleList(ctx *gin.Context) {
+	var pageInfo global.PageInfo
+	_ = ctx.ShouldBindQuery(&pageInfo)
 
-	// if menus, err := menuService.GetMenuTree(utils.GetUserAuthorityId(c)); err != nil {
-	// 	global.GVA_LOG.Error("获取失败!", zap.Error(err))
-	// 	response.FailWithMessage("获取失败", c)
-	// } else {
-	// 	if menus == nil {
-	// 		menus = []system.SysMenu{}
-	// 	}
-	// 	response.OkWithDetailed(systemRes.SysMenusResponse{Menus: menus}, "获取成功", c)
-	// }
+	if err := utils.Verify(pageInfo, utils.PageInfoVerify); err != nil {
+		utils.FailM(err.Error(), ctx)
+		return
+	}
+	var role request.SysRole
+ 	rbac_core.GetRoleList(&role, &pageInfo) {
+
+	}
+
 }

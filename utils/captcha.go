@@ -2,7 +2,7 @@
  * @Description: 验证码
  * @Author: Gavin
  * @Date: 2022-07-20 18:54:01
- * @LastEditTime: 2022-07-20 22:21:50
+ * @LastEditTime: 2022-07-21 14:06:22
  * @LastEditors: Gavin
  */
 package utils
@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	SESSION_SECRET  = "golang-gavin"
+	SESSION_SECRET  = "golang-tech-stack"
 	SESSION_MAX_AGE = 3600
 )
 
