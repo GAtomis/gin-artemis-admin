@@ -1,3 +1,10 @@
+/*
+ * @Description: 验证规则
+ * @Author: Gavin
+ * @Date: 2022-07-30 01:31:37
+ * @LastEditTime: 2022-08-03 05:15:05
+ * @LastEditors: Gavin
+ */
 package utils
 
 var (
@@ -12,7 +19,7 @@ var (
 	AutoCodeVerify         = Rules{"Abbreviation": {NotEmpty()}, "StructName": {NotEmpty()}, "PackageName": {NotEmpty()}, "Fields": {NotEmpty()}}
 	AutoPackageVerify      = Rules{"PackageName": {NotEmpty()}}
 	AuthorityVerify        = Rules{"AuthorityId": {NotEmpty()}, "AuthorityName": {NotEmpty()}}
-	AuthorityIdVerify      = Rules{"AuthorityId": {NotEmpty()}}
+	Primarykey             = Rules{"id": {NotEmpty()}}
 	OldAuthorityVerify     = Rules{"OldAuthorityId": {NotEmpty()}}
 	ChangePasswordVerify   = Rules{"Password": {NotEmpty()}, "NewPassword": {NotEmpty()}}
 	SetUserAuthorityVerify = Rules{"AuthorityId": {NotEmpty()}}

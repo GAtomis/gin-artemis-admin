@@ -2,7 +2,7 @@
  * @Description: user模块
  * @Author: Gavin
  * @Date: 2022-07-22 13:55:29
- * @LastEditTime: 2022-07-27 22:05:47
+ * @LastEditTime: 2022-08-08 19:08:28
  * @LastEditors: Gavin
  */
 package gateway
@@ -19,4 +19,5 @@ func (r *Router) InitUserRouter(g *gin.RouterGroup) {
 	roleGateway.POST("user", RBAC.CreateUser)
 	roleGateway.PUT("user", RBAC.UpdateUser)
 	roleGateway.GET("getUserInfo", RBAC.GetUserInfo)
+
 }

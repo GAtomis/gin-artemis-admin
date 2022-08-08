@@ -2,13 +2,14 @@
  * @Description: sql工具
  * @Author: Gavin
  * @Date: 2022-07-20 12:48:34
- * @LastEditTime: 2022-07-20 16:02:21
+ * @LastEditTime: 2022-08-08 22:12:52
  * @LastEditors: Gavin
  */
 package utils
 
 import (
 	"Artemis-admin-web/config"
+	"Artemis-admin-web/model/RBAC/request"
 
 	_ "github.com/go-sql-driver/mysql"
 	"gorm.io/driver/mysql"
@@ -21,18 +22,47 @@ import (
  * @return {*}
  * @Date: 2022-07-20 13:53:33
  */
+
+type SqlType struct {
+	db *gorm.DB
+}
+
+var GAA_SQL = new(SqlType)
+
+//初始化cb调用方法
 func InitSQL(cb func(*gorm.DB) (any, error)) (any, error) {
 
 	dsn := config.GetDsn()
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	sqlDB, _ := db.DB()
-	defer sqlDB.Close()
-
 	if err != nil {
 		return "", err
 	}
+	sqlDB, _ := db.DB()
+	defer sqlDB.Close()
+
 	res, err2 := cb(db)
 	return res, err2
+
+}
+
+func (sql *SqlType) StartSQL() (db *gorm.DB, err error) {
+
+	dsn := config.GetDsn()
+
+	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
+	sp := request.SysPermission{}
+	sr := request.SysRole{}
+	su := request.SysUser{}
+	db.AutoMigrate(&sp, &sr, &su)
+	sql.db = db
+	return
+
+}
+
+func (sql *SqlType) GetDB() (db *gorm.DB) {
+
+	return sql.db
 
 }

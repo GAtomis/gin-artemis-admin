@@ -2,7 +2,7 @@
  * @Description: 请输入....
  * @Author: Gavin
  * @Date: 2022-07-21 18:20:29
- * @LastEditTime: 2022-07-24 01:15:27
+ * @LastEditTime: 2022-08-08 18:29:03
  * @LastEditors: Gavin
  */
 package utils
@@ -42,7 +42,7 @@ func (j *JWT) InitJWT(u reqRBAC.SysUser) (string, error) {
 		UserInfo: u,
 		StandardClaims: jwt.StandardClaims{
 			NotBefore: time.Now().Unix() - 60,      //开始时间
-			ExpiresAt: time.Now().Unix() + 60*60*2, //过期时间
+			ExpiresAt: time.Now().Unix() + 60*60*6, //过期时间
 			Issuer:    u.Name,                      //戳
 		},
 	}
