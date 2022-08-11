@@ -2,28 +2,30 @@
  * @Description: 请输入....
  * @Author: Gavin
  * @Date: 2022-07-18 16:58:15
- * @LastEditTime: 2022-08-09 00:15:57
+ * @LastEditTime: 2022-08-10 16:25:01
  * @LastEditors: Gavin
  */
 package request
 
 import (
+	"Artemis-admin-web/model/business/request"
 	"Artemis-admin-web/model/global"
 )
 
 type SysUser struct {
 	global.DBModel
-	Name        string `json:"name" gorm:"type:varchar(32);comment:姓名;"`
-	Username    string `json:"username" gorm:"type:varchar(64);comment:姓名;"`
-	Password    string `json:"password" gorm:"type:varchar(32);comment:密码;"`
-	Avatar      string `json:"avatar" gorm:"type:varchar(255);comment:头像;default:https://avatars.githubusercontent.com/u/40788938?v=4;"`
-	JobType     string `json:"jobType" gorm:"type:varchar(32);comment:职位;"`
-	Company     string `json:"company" gorm:"type:varchar(32);comment:公司;"`
-	CatchPhrase string `json:"catchPhrase" gorm:"type:varchar(255);comment:个人简介;"`
-	Salt        string `json:"salt" gorm:"type:varchar(128);comment:盐;"`
-	Gender      bool   `json:"gender" gorm:"comment:性别;default:true"`
-	Locked      bool   `json:"locked" gorm:"comment:账号是否锁定，1：锁定，0未锁定;default:false"`
-	RoleId      uint   `json:"roleId"`
+	Name        string               `json:"name" gorm:"type:varchar(32);comment:姓名;"`
+	Username    string               `json:"username" gorm:"type:varchar(64);comment:姓名;"`
+	Password    string               `json:"password" gorm:"type:varchar(32);comment:密码;"`
+	Avatar      string               `json:"avatar" gorm:"type:varchar(255);comment:头像;default:https://avatars.githubusercontent.com/u/40788938?v=4;"`
+	JobType     string               `json:"jobType" gorm:"type:varchar(32);comment:职位;"`
+	Company     string               `json:"company" gorm:"type:varchar(32);comment:公司;"`
+	CatchPhrase string               `json:"catchPhrase" gorm:"type:varchar(255);comment:个人简介;"`
+	Salt        string               `json:"salt" gorm:"type:varchar(128);comment:盐;"`
+	Gender      bool                 `json:"gender" gorm:"comment:性别;default:true"`
+	Locked      bool                 `json:"locked" gorm:"comment:账号是否锁定，1：锁定，0未锁定;default:false"`
+	RoleId      uint                 `json:"roleId"`
+	BizComments []request.BizComment `json:"bizComments" gorm:"foreignKey:UserId;comment:评论条目;"`
 }
 
 type SysRole struct {

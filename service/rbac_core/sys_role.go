@@ -2,7 +2,7 @@
  * @Description: 业务层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 10:49:19
- * @LastEditTime: 2022-08-08 22:31:28
+ * @LastEditTime: 2022-08-09 14:27:59
  * @LastEditors: Gavin
  */
 package rbac_core
@@ -50,6 +50,9 @@ func (c Role) GetItem(body *global.Primarykey) (request.SysRole, error) {
 
 func (c Role) UpdateItem(body *request.SysRole) (request.SysRole, error) {
 	db := utils.GAA_SQL.GetDB()
+
+	spl := body.SysPermissions
 	err := db.Model(body).Updates(body).Error
+	err = db.Model(body).Association("SysPermissions").Replace(spl)
 	return *body, err
 }

@@ -2,7 +2,7 @@
  * @Description: sql工具
  * @Author: Gavin
  * @Date: 2022-07-20 12:48:34
- * @LastEditTime: 2022-08-08 22:12:52
+ * @LastEditTime: 2022-08-10 16:44:06
  * @LastEditors: Gavin
  */
 package utils
@@ -10,6 +10,8 @@ package utils
 import (
 	"Artemis-admin-web/config"
 	"Artemis-admin-web/model/RBAC/request"
+	reqBiz "Artemis-admin-web/model/business/request"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 	"gorm.io/driver/mysql"
@@ -51,14 +53,18 @@ func (sql *SqlType) StartSQL() (db *gorm.DB, err error) {
 	dsn := config.GetDsn()
 
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		fmt.Printf("数据库连接异常,%s", err.Error())
+		return
+	}
 
 	sp := request.SysPermission{}
 	sr := request.SysRole{}
 	su := request.SysUser{}
-	db.AutoMigrate(&sp, &sr, &su)
+	bc := reqBiz.BizComment{}
+	db.AutoMigrate(&bc, &sp, &sr, &su)
 	sql.db = db
-	return
-
+	return db, err
 }
 
 func (sql *SqlType) GetDB() (db *gorm.DB) {
