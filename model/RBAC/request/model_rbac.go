@@ -2,7 +2,7 @@
  * @Description: 请输入....
  * @Author: Gavin
  * @Date: 2022-07-18 16:58:15
- * @LastEditTime: 2022-08-10 16:25:01
+ * @LastEditTime: 2022-08-13 19:58:53
  * @LastEditors: Gavin
  */
 package request
@@ -33,6 +33,7 @@ type SysRole struct {
 	Name           string          `json:"name" gorm:"type:varchar(128);comment:角色名;"`
 	Available      bool            `json:"available" gorm:"comment:角色是否可用 1 Y ,0: N;default:true;"`
 	Describe       string          `json:"describe" gorm:"type:varchar(255);comment:描述;"`
+	Level          int             `json:"level" gorm:"comment:级别 0-系统管理员 1-组带表;default:1"`
 	SysUsers       []SysUser       `json:"sysUsers" gorm:"foreignKey:RoleId;comment:拥有用户;"`
 	SysPermissions []SysPermission `json:"sysPermissions"  gorm:"many2many:sys_role_permission;comment:角色&权限;"`
 }

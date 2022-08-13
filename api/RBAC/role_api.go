@@ -2,7 +2,7 @@
  * @Description: api层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 17:56:36
- * @LastEditTime: 2022-08-05 00:10:25
+ * @LastEditTime: 2022-08-13 20:19:25
  * @LastEditors: Gavin
  */
 package RBAC
@@ -111,9 +111,20 @@ func GetRoleList(ctx *gin.Context) {
 		utils.FailM(err.Error(), ctx)
 		return
 	}
-	var role request.SysRole
-	r2 := new(rbac_core.Role)
 
+	jwt := new(utils.JWT)
+	userInfo := jwt.GetUserInfo(ctx).UserInfo
+
+	Primarykey := global.Primarykey{
+		ID: userInfo.RoleId,
+	}
+
+	r2 := new(rbac_core.Role)
+	role, err2 := r2.GetItem(&Primarykey)
+	if err2 != nil {
+		utils.FailM("getRole fail"+err2.Error(), ctx)
+		return
+	}
 	if res, err2 := r2.GetRoleList(&role, &pageInfo); err2 != nil {
 		utils.FailDM(res, err2.Error(), ctx)
 	} else {

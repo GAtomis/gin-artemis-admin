@@ -2,7 +2,7 @@
  * @Description: 业务层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 10:49:19
- * @LastEditTime: 2022-08-09 14:27:59
+ * @LastEditTime: 2022-08-13 20:16:07
  * @LastEditors: Gavin
  */
 package rbac_core
@@ -11,6 +11,7 @@ import (
 	"Artemis-admin-web/model/RBAC/request"
 	"Artemis-admin-web/model/global"
 	"Artemis-admin-web/utils"
+	"fmt"
 )
 
 type Role struct {
@@ -34,7 +35,8 @@ func (r Role) GetRoleList(body *request.SysRole, info *global.PageInfo) (map[str
 	if err1 := db.Model(temp).Count(&total).Error; err1 != nil {
 		return nil, err1
 	}
-	if err2 := db.Model(temp).Limit(limit).Offset(offset).Preload("SysPermissions").Find(&result).Error; err2 != nil {
+	fmt.Printf("当前用户等级%v", body.Level)
+	if err2 := db.Model(temp).Where("level >= ?", body.Level).Limit(limit).Offset(offset).Preload("SysPermissions").Find(&result).Error; err2 != nil {
 		return map[string]any{"item": nil, "total": total}, err2
 	}
 	return map[string]any{"item": result, "total": total}, nil

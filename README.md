@@ -2,7 +2,7 @@
  * @Description: 文档
  * @Author: Gavin
  * @Date: 2022-07-18 15:07:50
- * @LastEditTime: 2022-08-13 14:37:48
+ * @LastEditTime: 2022-08-13 20:25:05
  * @LastEditors: Gavin
 -->
 # gin-artemis-admin
@@ -20,6 +20,7 @@
 * 日志记录
 * redis 缓存
 * 更新菜单是否可用状态bug
+* 更新了权限的等级制度
 
 
 ## 数据库配置
