@@ -2,7 +2,7 @@
  * @Description: 文档
  * @Author: Gavin
  * @Date: 2022-07-18 15:07:50
- * @LastEditTime: 2022-08-13 20:25:05
+ * @LastEditTime: 2022-08-13 20:44:51
  * @LastEditors: Gavin
 -->
 # gin-artemis-admin
@@ -55,3 +55,9 @@ func GetDsn() (dsn string) {
 
 
 ```
+## go 指令
+* 打包服务器=>GOOS=linux GOARCH=amd64 go build 
+* 编译并运行=>go run main.go
+* 编译当前环境=> go build 
+* 安装mod=> go install
+* 安装指定mod=> go get http://xxxxxxxxx
