@@ -2,7 +2,7 @@
  * @Description: 请输入....
  * @Author: Gavin
  * @Date: 2022-07-26 08:50:58
- * @LastEditTime: 2022-08-08 22:59:03
+ * @LastEditTime: 2022-08-13 10:53:00
  * @LastEditors: Gavin
  */
 package rbac_core
@@ -61,7 +61,6 @@ func (p *Permission) UpdateItem(body *request.SysPermission) (*request.SysPermis
 	db := utils.GAA_SQL.GetDB()
 	err := db.Model(body).Updates(body).Error
 	return body, err
-
 }
 
 func (p *Permission) DelItem(body *request.SysPermission) (*request.SysPermission, error) {

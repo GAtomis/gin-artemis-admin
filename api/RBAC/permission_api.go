@@ -2,7 +2,7 @@
  * @Description:权限
  * @Author: Gavin
  * @Date: 2022-08-03 10:53:48
- * @LastEditTime: 2022-08-08 23:00:30
+ * @LastEditTime: 2022-08-13 14:39:11
  * @LastEditors: Gavin
  */
 package RBAC
@@ -12,6 +12,7 @@ import (
 	"Artemis-admin-web/model/global"
 	"Artemis-admin-web/service/rbac_core"
 	"Artemis-admin-web/utils"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -75,6 +76,7 @@ func (api *PERMISSION_API) UpdatePermission(ctx *gin.Context) {
 	}
 	// fmt.Printf("newSysPermission.SysPermissions: %v\n", newSysPermission.SysPermissions)
 	//载入api
+	fmt.Printf("%+v", newSysPermission)
 	r2 := new(rbac_core.Permission)
 	res, err2 := r2.UpdateItem(&newSysPermission)
 	if err2 != nil {

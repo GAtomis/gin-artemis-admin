@@ -5,14 +5,13 @@
 
  * @Author: Gavin
  * @Date: 2022-07-22 11:30:35
- * @LastEditTime: 2022-07-31 10:45:38
+ * @LastEditTime: 2022-08-13 11:00:55
  * @LastEditors: Gavin
  */
 package interceptor
 
 import (
 	"Artemis-admin-web/utils"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
@@ -41,7 +40,7 @@ func JWTAuth() gin.HandlerFunc {
 		// j := utils.NewJWT()
 		// // parseToken 解析token包含的信息
 		// claims, err := j.ParseToken(token)
-		fmt.Printf(" token是: %v\n", token)
+		// fmt.Printf(" token是: %v\n", token)
 		j := utils.JWT{}
 		claims, err := j.ParseToken(token)
 		if err != nil {
