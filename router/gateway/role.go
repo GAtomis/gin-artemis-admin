@@ -2,8 +2,8 @@
  * @Description: 路由层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 16:30:11
- * @LastEditTime: 2022-08-04 18:03:18
- * @LastEditors: Gavin
+ * @LastEditTime: 2022-11-10 12:10:12
+ * @LastEditors: Gavin 850680822@qq.com
  */
 package gateway
 
@@ -22,5 +22,6 @@ func (r *Router) InitRoleRouter(g *gin.RouterGroup) {
 	roleGateway.GET("role", RBAC.GetRole)
 	roleGateway.PUT("role", RBAC.UpdateRole)
 	roleGateway.GET("list", RBAC.GetRoleList)
+	roleGateway.PUT("updateRoleOfPermission", RBAC.UpdateRoleOfPermission)
 
 }

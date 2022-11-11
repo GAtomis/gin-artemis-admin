@@ -26,7 +26,7 @@ func (api *PERMISSION_API) GetPermissionByRoleId(ctx *gin.Context) {
 	MyClaims := jwt.GetUserInfo(ctx)
 	//载入api
 	r2 := new(rbac_core.Permission)
-	sp, err := r2.GetItemByRoleId(MyClaims.UserInfo.ID)
+	sp, err := r2.GetItemByRoleId(MyClaims.UserInfo.RoleId)
 	if err != nil {
 		utils.FailM("查询失败", ctx)
 		return
@@ -100,14 +100,14 @@ func (api *PERMISSION_API) CreatePermission(ctx *gin.Context) {
 	//成功JSON化
 	err := ctx.ShouldBindJSON(&newSysPermission)
 	if err != nil {
-		utils.Fail(ctx)
+		utils.FailM(err.Error(), ctx)
 		return
 	}
 	//载入api
 	r2 := new(rbac_core.Permission)
 	res, err2 := r2.CreateItem(&newSysPermission)
 	if err2 != nil {
-		utils.Fail(ctx)
+		utils.FailM(err2.Error(), ctx)
 		return
 	}
 	utils.OkDM(res.ID, "操作成功", ctx)

@@ -11,14 +11,16 @@ import (
 	"Artemis-admin-web/model/RBAC/request"
 	"Artemis-admin-web/model/global"
 	"Artemis-admin-web/utils"
+	"fmt"
 )
 
 type Permission struct {
 }
 
-//查列表通过关联RoleId
-func (p *Permission) GetItemByRoleId(ID uint) ([]request.SysPermission, error) {
+// 查列表通过关联RoleId
+func (p *Permission) GetItemByRoleId(ID string) ([]request.SysPermission, error) {
 	db := utils.GAA_SQL.GetDB()
+	fmt.Printf("ID: %v\n", ID)
 	sr := request.SysRole{
 		DBModel: global.DBModel{
 			ID: ID,
@@ -30,7 +32,7 @@ func (p *Permission) GetItemByRoleId(ID uint) ([]request.SysPermission, error) {
 	return sp, err2
 }
 
-//查询列表
+// 查询列表
 func (r *Permission) GetList(body *request.SysPermission, info *global.PageInfo) (map[string]any, error) {
 
 	db := utils.GAA_SQL.GetDB()

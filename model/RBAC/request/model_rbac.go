@@ -24,7 +24,7 @@ type SysUser struct {
 	Salt        string               `json:"salt" gorm:"type:varchar(128);comment:盐;"`
 	Gender      bool                 `json:"gender" gorm:"comment:性别;default:true"`
 	Locked      bool                 `json:"locked" gorm:"comment:账号是否锁定，1：锁定，0未锁定;default:false"`
-	RoleId      uint                 `json:"roleId"`
+	RoleId      string               `json:"roleId" gorm:"type:varchar(64);comment:权限ID;"`
 	BizComments []request.BizComment `json:"bizComments" gorm:"foreignKey:UserId;comment:评论条目;"`
 }
 
@@ -41,10 +41,10 @@ type SysRole struct {
 type SysPermission struct {
 	global.DBModel
 	Name       string    `json:"name" gorm:"type:varchar(128);comment:资源名称;"`
-	Type       string    `json:"type" gorm:"type:varchar(32);comment:资源类型：menu,button;"`
+	Type       string    `json:"type" gorm:"type:varchar(32);comment:资源类型：menu,link;"`
 	Url        string    `json:"url" gorm:"type:varchar(128);comment:访问url地址;"`
 	Percode    string    `json:"percode" gorm:"type:varchar(128);comment:权限代码字符串';"`
-	Parentid   string    `json:"parentid" gorm:"type:varchar(20);comment:父结点id;"`
+	Parentid   string    `json:"parentid" gorm:"type:varchar(255);comment:父结点id;"`
 	Parentids  string    `json:"parentids" gorm:"type:varchar(128);comment:父结点id列表串;"`
 	Sortstring string    `json:"sortstring" gorm:"type:varchar(128);comment:排序号;"`
 	Available  bool      `json:"available" gorm:"comment:是否可用 1 Y ,0: N;default:true;"`

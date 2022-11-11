@@ -62,7 +62,7 @@ func (sql *SqlType) StartSQL() (db *gorm.DB, err error) {
 	sr := request.SysRole{}
 	su := request.SysUser{}
 	bc := reqBiz.BizComment{}
-	db.AutoMigrate(&bc, &sp, &sr, &su)
+	db.AutoMigrate( &sr,&sp,&su,&bc)
 	sql.db = db
 	return db, err
 }
