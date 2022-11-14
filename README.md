@@ -2,8 +2,8 @@
  * @Description: 文档
  * @Author: Gavin
  * @Date: 2022-07-18 15:07:50
- * @LastEditTime: 2022-08-13 20:25:05
- * @LastEditors: Gavin
+ * @LastEditTime: 2022-11-14 22:48:58
+ * @LastEditors: Gavin 850680822@qq.com
 -->
 # gin-artemis-admin
 后台管理基础模版,通过golang+gin+gorm,默认是连接的Mysql数据库
@@ -21,7 +21,7 @@
 * redis 缓存
 * 更新菜单是否可用状态bug
 * 更新了权限的等级制度
-
+* 修改了一些bug,将主键全部替换为uuid
 
 ## 数据库配置
 在config目录下建立自己的数据库配置

@@ -2,7 +2,7 @@
  * @Description: 业务层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 10:49:19
- * @LastEditTime: 2022-11-10 23:55:42
+ * @LastEditTime: 2022-11-14 23:37:47
  * @LastEditors: Gavin 850680822@qq.com
  */
 package rbac_core
@@ -69,7 +69,7 @@ func (c Role) UpdateRoleOfPermission(body *request.SysRole) (request.SysRole, er
 	var err error
 	// if len(spl) > 0 {
 	// } else {
-	// 	err = db.Model(body).Association("SysPermissions").Clear()
+	// 		err = db.Model(body).Association("SysPermissions").Clear()
 	// }
 	err = db.Model(body).Association("SysPermissions").Replace(spl)
 	return *body, err
