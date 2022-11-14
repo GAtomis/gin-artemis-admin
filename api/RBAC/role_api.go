@@ -2,7 +2,7 @@
  * @Description: api层 RBAC
  * @Author: Gavin
  * @Date: 2022-07-19 17:56:36
- * @LastEditTime: 2022-11-11 16:34:14
+ * @LastEditTime: 2022-11-15 00:14:04
  * @LastEditors: Gavin 850680822@qq.com
  */
 package RBAC
@@ -16,13 +16,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type ROLE_API struct {
+}
+
 /**
  * @description: 更新路由和角色的绑定关系
  * @param {*gin.Context} ctx
  * @return {*}
  * @Date: 2022-08-04 18:02:51
  */
-func UpdateRoleOfPermission(ctx *gin.Context) {
+func (r *ROLE_API) UpdateRoleOfPermission(ctx *gin.Context) {
 	//声明一个SysRole
 	var newSysRole request.SysRole
 	//成功JSON化
@@ -48,7 +51,7 @@ func UpdateRoleOfPermission(ctx *gin.Context) {
  * @return {*}
  * @Date: 2022-08-04 18:02:51
  */
-func UpdateRole(ctx *gin.Context) {
+func (r *ROLE_API) UpdateRole(ctx *gin.Context) {
 	//声明一个SysRole
 	var newSysRole request.SysRole
 	//成功JSON化
@@ -76,7 +79,7 @@ func UpdateRole(ctx *gin.Context) {
 // @Param data body request.Empty true "空"
 // @Success 200 {object} response.Response{data=systemRes.SysMenusResponse,msg=string} "获取用户动态路由,返回包括系统菜单详情列表"
 // @Router /menu/getMenu [post]
-func CreateRole(ctx *gin.Context) {
+func (r *ROLE_API) CreateRole(ctx *gin.Context) {
 	//声明一个SysRole
 	var newSysRole request.SysRole
 	//成功JSON化
@@ -102,7 +105,7 @@ func CreateRole(ctx *gin.Context) {
 // @Param data body request.Empty true "空"
 // @Success 200 {object} response.Response{data=systemRes.SysMenusResponse,msg=string} "获取用户动态路由,返回包括系统菜单详情列表"
 // @Router /menu/getMenu [post]
-func GetRole(ctx *gin.Context) {
+func (r *ROLE_API) GetRole(ctx *gin.Context) {
 
 	var Primarykey global.Primarykey
 
@@ -129,7 +132,7 @@ func GetRole(ctx *gin.Context) {
  * @return {*}
  * @Date: 2022-08-04 17:57:34
  */
-func GetRoleList(ctx *gin.Context) {
+func (r *ROLE_API) GetRoleList(ctx *gin.Context) {
 	var pageInfo global.PageInfo
 	_ = ctx.ShouldBindQuery(&pageInfo)
 
