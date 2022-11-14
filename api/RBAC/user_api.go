@@ -2,13 +2,14 @@
  * @Description: 请输入....
  * @Author: Gavin
  * @Date: 2022-07-22 16:00:03
- * @LastEditTime: 2022-07-27 22:05:00
- * @LastEditors: Gavin
+ * @LastEditTime: 2022-11-14 17:16:09
+ * @LastEditors: Gavin 850680822@qq.com
  */
 package RBAC
 
 import (
 	"Artemis-admin-web/model/RBAC/request"
+	"Artemis-admin-web/model/global"
 	"Artemis-admin-web/service/rbac_core"
 	"Artemis-admin-web/utils"
 
@@ -37,10 +38,27 @@ func CreateUser(ctx *gin.Context) {
 func GetUserInfo(ctx *gin.Context) {
 	jwt := new(utils.JWT)
 	tokenInfo := jwt.GetUserInfo(ctx)
-	if tokenInfo != nil {
-		utils.OkDM(tokenInfo.UserInfo, "操作成功", ctx)
+
+	if noCache, _ := ctx.GetQuery("noCache"); noCache == "1" {
+
+		var pk global.Primarykey
+		pk.ID = tokenInfo.UserInfo.ID
+		api := new(rbac_core.User)
+
+		res, err2 := api.GetItem(&pk)
+		if err2 != nil {
+			utils.Fail(ctx)
+			return
+		}
+		utils.OkDM(res, "操作成功", ctx)
+
 	} else {
-		utils.Fail(ctx)
+
+		if tokenInfo != nil {
+			utils.OkDM(tokenInfo.UserInfo, "操作成功", ctx)
+		} else {
+			utils.Fail(ctx)
+		}
 	}
 
 }
