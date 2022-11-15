@@ -2,14 +2,17 @@
  * @Description: 请输入....
  * @Author: Gavin
  * @Date: 2022-07-22 17:27:56
- * @LastEditTime: 2022-07-25 12:01:15
- * @LastEditors: Gavin
+ * @LastEditTime: 2022-11-15 12:52:32
+ * @LastEditors: Gavin 850680822@qq.com
  */
 package base
 
 import (
 	"Artemis-admin-web/model/base/request"
+	"Artemis-admin-web/model/base/response"
+	"Artemis-admin-web/model/global"
 	"Artemis-admin-web/service/base_core"
+	"Artemis-admin-web/service/rbac_core"
 	"Artemis-admin-web/utils"
 
 	"github.com/gin-gonic/gin"
@@ -26,17 +29,37 @@ func Login(c *gin.Context) {
 	}
 	if utils.CaptchaVerify(c, login.Code) {
 		b := base_core.Base{}
-		token, err2 := b.Login(login)
-		if err2 == nil {
-			utils.OkDM(token, "验证成功", c)
+		if sul, err2 := b.Login(login); err2 != nil {
+			utils.FailM(err2.Error(), c)
 
 		} else {
-			utils.FailDM("", err2.Error(), c)
+
+			api := new(rbac_core.User)
+			pk := global.Primarykey{
+				ID: sul.ID,
+			}
+			sui, err2 := api.GetItem(&pk)
+
+			jwt := new(utils.JWT)
+			s, err2 := jwt.InitJWT(sui)
+			if err2 == nil {
+				utils.OkDM(response.Token{
+					Token: s,
+				}, "success", c)
+			}
+
 		}
+
+		// if err2 == nil {
+		// 	utils.OkDM(token, "success", c)
+
+		// } else {
+		// 	utils.FailDM("", err2.Error(), c)
+		// }
 
 		return
 	}
-	utils.FailDM("", "验证码错误", c)
+	utils.FailDM("", "Verification code error", c)
 	return
 
 }

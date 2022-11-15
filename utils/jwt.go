@@ -36,7 +36,7 @@ var mySigningKey []byte
  * @return {string, error} 返回一个token
  * @Date: 2022-07-21 18:43:59
  */
-func (j *JWT) InitJWT(u reqRBAC.SysUser) (string, error) {
+func (j *JWT) InitJWT(u reqRBAC.SysUserInfo) (string, error) {
 
 	c := response.MyClaims{
 		UserInfo: u,
@@ -116,7 +116,7 @@ func (j *JWT) GetUserInfo(c *gin.Context) *response.MyClaims {
 	}
 }
 
-//检查请求头中是否有token
+// 检查请求头中是否有token
 func (j *JWT) CheckClaims(c *gin.Context) (*response.MyClaims, error) {
 	token := c.Request.Header.Get("Authorization")
 

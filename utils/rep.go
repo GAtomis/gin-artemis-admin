@@ -2,8 +2,8 @@
  * @Description: 工具
  * @Author: Gavin
  * @Date: 2022-07-20 11:14:40
- * @LastEditTime: 2022-07-21 17:43:49
- * @LastEditors: Gavin
+ * @LastEditTime: 2022-11-15 12:42:04
+ * @LastEditors: Gavin 850680822@qq.com
  */
 package utils
 
@@ -49,7 +49,7 @@ func Result(code int, result any, msg string, c *gin.Context) {
  * @Date: 2022-07-20 11:26:23
  */
 func Ok(ctx *gin.Context) {
-	Result(SUCCESS, map[string]interface{}{}, "操作成功", ctx)
+	Result(SUCCESS, map[string]interface{}{}, "success", ctx)
 }
 
 /**
@@ -72,7 +72,7 @@ func OkDM(data interface{}, message string, c *gin.Context) {
  */
 func Fail(ctx *gin.Context) {
 
-	Result(ERROR, map[string]interface{}{}, "操作失败", ctx)
+	Result(ERROR, map[string]interface{}{}, "fail", ctx)
 
 }
 

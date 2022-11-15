@@ -13,8 +13,8 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-//JTW模版
+// JTW模版
 type MyClaims struct {
-	UserInfo request.SysUser
+	UserInfo request.SysUserInfo
 	jwt.StandardClaims
 }

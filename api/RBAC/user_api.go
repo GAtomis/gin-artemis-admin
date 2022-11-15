@@ -2,7 +2,7 @@
  * @Description: 请输入....
  * @Author: Gavin
  * @Date: 2022-07-22 16:00:03
- * @LastEditTime: 2022-11-14 17:16:09
+ * @LastEditTime: 2022-11-15 15:05:41
  * @LastEditors: Gavin 850680822@qq.com
  */
 package RBAC
@@ -16,9 +16,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CreateUser(ctx *gin.Context) {
+type USER_INFO_API struct {
+}
 
-	var newUser request.SysUser
+func (uia *USER_INFO_API) CreateUser(ctx *gin.Context) {
+
+	var newUser request.SysUserInfo
 
 	err := ctx.ShouldBindJSON(&newUser)
 	if err != nil {
@@ -31,11 +34,11 @@ func CreateUser(ctx *gin.Context) {
 		utils.FailM(err2.Error(), ctx)
 		return
 	}
-	utils.OkDM(res.ID, "操作成功", ctx)
+	utils.OkDM(res.ID, "success", ctx)
 
 }
 
-func GetUserInfo(ctx *gin.Context) {
+func (uia *USER_INFO_API) GetUserInfo(ctx *gin.Context) {
 	jwt := new(utils.JWT)
 	tokenInfo := jwt.GetUserInfo(ctx)
 
@@ -50,22 +53,22 @@ func GetUserInfo(ctx *gin.Context) {
 			utils.Fail(ctx)
 			return
 		}
-		utils.OkDM(res, "操作成功", ctx)
+		utils.OkDM(res, "success", ctx)
 
 	} else {
 
 		if tokenInfo != nil {
-			utils.OkDM(tokenInfo.UserInfo, "操作成功", ctx)
+			utils.OkDM(tokenInfo.UserInfo, "success", ctx)
 		} else {
 			utils.Fail(ctx)
 		}
 	}
 
 }
-func UpdateUser(ctx *gin.Context) {
+func (uia *USER_INFO_API) UpdateUser(ctx *gin.Context) {
 	jwt := new(utils.JWT)
 	tokenInfo := jwt.GetUserInfo(ctx)
-	var user request.SysUser
+	var user request.SysUserInfo
 	ctx.ShouldBindJSON(&user)
 
 	if tokenInfo != nil {
@@ -75,7 +78,7 @@ func UpdateUser(ctx *gin.Context) {
 			utils.Fail(ctx)
 			return
 		}
-		utils.OkDM(res.ID, "操作成功", ctx)
+		utils.OkDM(res.ID, "success", ctx)
 	} else {
 		utils.Fail(ctx)
 	}

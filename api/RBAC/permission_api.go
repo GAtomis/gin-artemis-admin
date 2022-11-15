@@ -32,7 +32,7 @@ func (api *PERMISSION_API) GetPermissionByRoleId(ctx *gin.Context) {
 		return
 	}
 
-	utils.OkDM(sp, "操作成功", ctx)
+	utils.OkDM(sp, "success", ctx)
 
 }
 
@@ -83,7 +83,7 @@ func (api *PERMISSION_API) UpdatePermission(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-	utils.OkDM(res.ID, "操作成功", ctx)
+	utils.OkDM(res.ID, "success", ctx)
 
 }
 
@@ -110,7 +110,7 @@ func (api *PERMISSION_API) CreatePermission(ctx *gin.Context) {
 		utils.FailM(err2.Error(), ctx)
 		return
 	}
-	utils.OkDM(res.ID, "操作成功", ctx)
+	utils.OkDM(res.ID, "success", ctx)
 }
 func (api *PERMISSION_API) DeletePermission(ctx *gin.Context) {
 	//声明一个SysPermission
@@ -129,7 +129,7 @@ func (api *PERMISSION_API) DeletePermission(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-	utils.OkDM(res.ID, "操作成功", ctx)
+	utils.OkDM(res.ID, "success", ctx)
 }
 
 func (api *PERMISSION_API) GetPermission(ctx *gin.Context) {
@@ -147,5 +147,5 @@ func (api *PERMISSION_API) GetPermission(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-	utils.OkDM(*res, "操作成功", ctx)
+	utils.OkDM(*res, "success", ctx)
 }

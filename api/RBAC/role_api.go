@@ -42,7 +42,7 @@ func (r *ROLE_API) UpdateRoleOfPermission(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-	utils.OkDM(res.ID, "操作成功", ctx)
+	utils.OkDM(res.ID, "success", ctx)
 }
 
 /**
@@ -68,7 +68,7 @@ func (r *ROLE_API) UpdateRole(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-	utils.OkDM(res.ID, "操作成功", ctx)
+	utils.OkDM(res.ID, "success", ctx)
 
 }
 
@@ -95,7 +95,7 @@ func (r *ROLE_API) CreateRole(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-	utils.OkDM(res.ID, "操作成功", ctx)
+	utils.OkDM(res.ID, "success", ctx)
 }
 
 // @Tags AuthorityMenu
@@ -123,7 +123,7 @@ func (r *ROLE_API) GetRole(ctx *gin.Context) {
 		utils.Fail(ctx)
 		return
 	}
-	utils.OkDM(res, "操作成功", ctx)
+	utils.OkDM(res, "success", ctx)
 }
 
 /**
